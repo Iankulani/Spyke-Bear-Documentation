@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Spyke Bear Documentaion</title>
+  <!-- Google Fonts & smooth animations -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #050b1a 0%, #0a0f2a 100%);
+      color: #eef5ff;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* animated grain & bear accent */
+    .bg-bear-claw {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, rgba(114, 46, 209, 0.08) 0%, rgba(0, 20, 80, 0.2) 100%);
+      z-index: -2;
+    }
+
+    /* floating orbs animations */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.3;
+      z-index: -1;
+      animation: floatOrb 18s infinite alternate ease-in-out;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -40px) scale(1.2); }
+    }
+
+    .orb1 { width: 40vw; height: 40vw; background: #6c2bd9; top: -10vh; left: -10vw; }
+    .orb2 { width: 35vw; height: 35vw; background: #1e3a8a; bottom: -15vh; right: -5vw; animation-duration: 25s; }
+    .orb3 { width: 25vw; height: 25vw; background: #a855f7; bottom: 20vh; left: 60vw; animation-duration: 20s; opacity: 0.2; }
+
+    /* container & layout */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header with animated bear */
+    .bear-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0 1rem;
+    }
+
+    .bear-icon {
+      font-size: 5.2rem;
+      filter: drop-shadow(0 0 12px #a855f7);
+      animation: bounceSoft 2s infinite ease;
+      display: inline-block;
+    }
+
+    @keyframes bounceSoft {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #C084FC, #3B82F6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-top: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      max-width: 680px;
+      margin: 0.75rem auto;
+      color: #b9d0f0;
+      background: rgba(15, 25, 55, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+    }
+
+    /* social & platform badges */
+    .social-rail {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .social-btn {
+      background: rgba(20, 30, 65, 0.7);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(139, 92, 246, 0.5);
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      transition: 0.25s ease;
+      color: #e2e8ff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .social-btn i {
+      font-size: 1.2rem;
+    }
+
+    .social-btn:hover {
+      background: #3b2b7c;
+      border-color: #a855f7;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(128, 90, 213, 0.3);
+      color: white;
+    }
+
+    /* main sections grid */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .doc-grid {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    .card {
+      background: rgba(8, 14, 30, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #8b5cf6;
+      box-shadow: 0 24px 40px -12px #3b0764;
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-left: 4px solid #a855f7;
+      padding-left: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      margin: 1rem 0 0.6rem;
+      color: #c4b5fd;
+    }
+
+    .cmd-badge {
+      background: #0c0f2c;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #b9e6ff;
+      border: 1px solid #3b82f6;
+    }
+
+    pre {
+      background: #030617;
+      padding: 1rem;
+      border-radius: 1rem;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      border-left: 5px solid #8b5cf6;
+    }
+
+    .step-list {
+      list-style-type: none;
+      counter-reset: step-counter;
+    }
+    .step-list li {
+      counter-increment: step-counter;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .step-list li::before {
+      content: counter(step-counter);
+      background: #6d28d9;
+      width: 24px;
+      height: 24px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .platform-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+    .plat {
+      background: #11162e;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid #2d3a6e;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(139, 92, 246, 0.3);
+      font-size: 0.85rem;
+    }
+
+    .glow-text {
+      text-shadow: 0 0 4px #a855f7;
+    }
+
+    button, .fake-btn {
+      background: linear-gradient(95deg, #6c2bd9, #2563eb);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 34px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+  </style>
+</head>
+<body>
+<div class="bg-bear-claw"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="container">
+  <!-- HERO animated Spyke Bear area -->
+  <div class="bear-hero">
+    <div class="bear-icon">
+      🐻‍❄️🔒
+    </div>
+    <h1>SPYKE BEAR</h1>
+    <div class="tagline">
+      <i class="fas fa-shield-haltered"></i> Cyber-security enabled • Fire commands via Telegram, Slack, Discord, iMessage & Web <i class="fas fa-terminal"></i>
+    </div>
+    <div class="social-rail">
+      <a href="https://github.com/Iankulani/spykebear" class="social-btn" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="#" class="social-btn" target="_blank"><i class="fab fa-gitlab"></i> GitLab</a>
+      <a href="#" class="social-btn" target="_blank"><i class="fab fa-twitter"></i> X (Twitter)</a>
+      <a href="#" class="social-btn" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#" class="social-btn" target="_blank"><i class="fab fa-slack"></i> Slack</a>
+      <a href="#" class="social-btn" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+    </div>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem;">🔗 Official connectors — real-time command execution across all major platforms</p>
+  </div>
+
+  <div class="doc-grid">
+    <!-- LEFT: Installation & GitHub workflow -->
+    <div class="card">
+      <h2><i class="fab fa-github"></i> Installation · GitHub</h2>
+      <p>Deploy <strong>Spyke Bear</strong> in minutes. The bot listens for authenticated commands and executes security actions (network scans, log checks, threat intel, etc).</p>
+      
+      <h3><i class="fas fa-code-branch"></i> 1. Clone from GitHub</h3>
+      <pre><code>git clone https://github.com/Iankulani/spykebear.git
+cd spykebear</code></pre>
+
+      <h3><i class="fas fa-cogs"></i> 2. Environment setup</h3>
+      <pre><code># Copy example env
+cp .env.example .env
+# Edit with your API keys for Telegram, Slack, Discord, iMessage bridge
+nano .env</code></pre>
+
+      <h3><i class="fas fa-dharmachakra"></i> 3. Docker / Node</h3>
+      <pre><code># Using python(18+)
+python spykebear.py
+
+
+# or Docker (recommended)
+docker-compose up -d</code></pre>
+
+      <h3><i class="fas fa-plug"></i> 4. Connect platforms</h3>
+      <ul class="step-list" style="margin-top: 0.5rem;">
+        <li><strong>Telegram</strong>: Create bot via @BotFather, set TELEGRAM_TOKEN</li>
+        <li><strong>Slack</strong>: App + Socket Mode, SLACK_BOT_TOKEN, signing secret</li>
+        <li><strong>Discord</strong>: Bot token + Privileged Gateway Intents</li>
+        <li><strong>iMessage</strong>: Use AppleScript bridge / Mac mini relay (iMessage extension)</li>
+        <li><strong>Web</strong>: Built-in dashboard on port 3000 with live command UI</li>
+      </ul>
+      <p><i class="fas fa-check-circle" style="color:#34d399;"></i> After setup, Spyke Bear auto-connects to all channels. <strong>Every command is encrypted & audit logged</strong>.</p>
+      <div class="platform-icons">
+        <span class="plat"><i class="fab fa-telegram"></i> Telegram</span>
+        <span class="plat"><i class="fab fa-slack"></i> Slack</span>
+        <span class="plat"><i class="fab fa-discord"></i> Discord</span>
+        <span class="plat"><i class="fab fa-apple"></i> iMessage</span>
+        <span class="plat"><i class="fas fa-globe"></i> Web UI</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Commands & usage + social proof -->
+    <div class="card">
+      <h2><i class="fas fa-bolt"></i> Fire Commands · Syntax</h2>
+      <p>Send commands from any integrated chat or web terminal. Spyke Bear responds in real-time with cyber intelligence and system actions.</p>
+      <h3>🔹 Core Command Structure</h3>
+      <pre><code>/spyke &lt;action&gt; [target] [options]
+
+Examples:
+/scan 192.168.1.0
+/nmap 127.0.0.7
+/analyze 127.0.0.7
+/curl <Domain>
+/spyke status</code></pre>
+      <h3><i class="fas fa-comment-dots"></i> Platform-specific usage</h3>
+      <p><strong>Telegram/Slack/Discord:</strong> Use <code>/spyke</code> prefix or mention <code>@SpykeBear</code>. <br>
+      <strong>iMessage:</strong> Text <code>spyke: command</code> to configured number.<br>
+      <strong>Web Terminal:</strong> Access <code>https://your-spyke.domain/terminal</code> with JWT token.</p>
+      <div class="cmd-badge">🔐 All traffic protected with TLS + end-to-end verification</div>
+      <h3 style="margin-top: 1.2rem;"><i class="fas fa-robot"></i> Cybersecurity modules</h3>
+      <ul style="margin-left: 1.2rem; line-height: 1.6;">
+        <li>📡 Network reconnaissance & port scanning</li>
+        <li>🛡️ Endpoint detection (EDR queries)</li>
+        <li>📊 SIEM log aggregation (via API)</li>
+        <li>🧠 AI-driven threat analysis</li>
+        <li>⚡ Automated incident response</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Additional section: animated web integration and more -->
+  <div class="card" style="margin: 2rem 0 0rem;">
+    <h2><i class="fas fa-chalkboard-user"></i> Web Dashboard & Live Animation</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center;">
+      <div style="flex:1; min-width: 200px;">
+        <p><strong>🌐 Spyke Web Commander</strong> — interactive terminal with real-time output, command history, and threat visualization. Built with Next.js & WebSockets for low-latency commands.</p>
+        <div style="background:#010514; border-radius: 18px; padding: 1rem; margin-top: 1rem;">
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <i class="fas fa-terminal" style="color:#a78bfa;"></i>
+            <span style="font-family: monospace;">$ <span id="demoCommand">/spyke scan network</span></span>
+            <button id="animateCmdBtn" class="fake-btn" style="margin-left: auto;">▶ Fire Demo</button>
+          </div>
+          <div id="animationOutput" style="margin-top: 0.8rem; font-family: monospace; font-size: 0.8rem; color:#a5f3c3; border-top: 1px solid #334155; padding-top: 0.5rem;">
+            🐻‍❄️ Spyke Bear ready — last response: System secure. No anomalies.
+          </div>
+        </div>
+      </div>
+      <div style="flex:0.5; text-align: center;">
+        <i class="fas fa-shield-alt" style="font-size: 4rem; color:#a855f7; animation: pulse 2s infinite;"></i>
+        <style>
+          @keyframes pulse { 0% { text-shadow: 0 0 0px #a855f7; } 50% { text-shadow: 0 0 15px #a855f7; } 100% { text-shadow: 0 0 0px; }}
+        </style>
+        <p>live demo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- documentation friendly extra: detailed step-by-step web installation guide -->
+  <div class="card" style="margin: 2rem 0;">
+    <h2><i class="fas fa-book-open"></i> Step-by-Step Web + Next.js Deployment</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1rem;">
+      <div>
+        <h3>📦 1. Setup Next.js frontend</h3>
+        <pre><code>npx create-next-app@latest spyke-web
+cd spyke-web
+npm install socket.io-client axios</code></pre>
+        <p>Integrate API routes that forward commands to Spyke core.</p>
+      </div>
+      <div>
+        <h3>🔌 2. Backend bridge</h3>
+        <pre><code>// pages/api/command.js
+import { executeSpykeCmd } from '../../lib/bearCore';
+export default async function handler(req,res) {
+  const {cmd} = req.body;
+  const output = await executeSpykeCmd(cmd);
+  res.status(200).json({result: output});
+}</code></pre>
+      </div>
+      <div>
+        <h3>🎨 3. Animated UI theme</h3>
+        <p>Tailwind + Framer Motion, purple/blue gradient. Live socket feed for command responses → Cyber bear avatar reacts to commands.</p>
+      </div>
+      <div>
+        <h3>🚀 4. Deploy on Vercel / Self-host</h3>
+        <pre><code>vercel --prod
+# or docker build -t spyke-web .</code></pre>
+        <p>Connect GitHub for auto deploy. Includes security headers & CSP.</p>
+      </div>
+    </div>
+    <div style="margin-top: 1rem; background: #0b0f24; border-radius: 20px; padding: 0.7rem;">
+      <i class="fas fa-link"></i> Continuous integration: GitHub Actions run security tests and push to Docker Hub. GitLab mirrors available!
+    </div>
+  </div>
+
+  <!-- full social & integration verification -->
+  <div class="card" style="margin-bottom: 1rem;">
+    <h2><i class="fas fa-share-alt"></i> Connected Ecosystem — Github, X, GitLab, Slack, LinkedIn & Facebook</h2>
+    <p>Spyke Bear publishes real-time security alerts to all your favorite channels. You can also manage commands via:</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0;">
+      <div><i class="fab fa-github"></i> <strong>GitHub:</strong> React to security events with issue creation</div>
+      <div><i class="fab fa-gitlab"></i> <strong>GitLab:</strong> Pipeline trigger via CI/CD webhooks</div>
+      <div><i class="fab fa-twitter"></i> <strong>X (Twitter):</strong> DM commands & periodic threat tweets</div>
+      <div><i class="fab fa-linkedin"></i> <strong>LinkedIn:</strong> share security post summaries</div>
+      <div><i class="fab fa-slack"></i> <strong>Slack:</strong> slash commands + incident channels</div>
+      <div><i class="fab fa-facebook"></i> <strong>Facebook:</strong> messenger bot integration for small teams</div>
+    </div>
+    <pre><code># .env connector example
+SLACK_WEBHOOK_URL=https://hooks.slack.com/... 
+DISCORD_BOT_TOKEN=...
+TELEGRAM_BOT_TOKEN=...
+IMESSAGE_BRIDGE_ENABLED=true
+TWITTER_BEARER_TOKEN=...
+GITHUB_PERSONAL_TOKEN=...
+LINKEDIN_ACCESS_TOKEN=...</code></pre>
+    <p>All data stays encrypted. <i class="fas fa-lock"></i> Spyke Bear's zero-trust architecture ensures each platform validates command origin.</p>
+  </div>
+
+  <!-- more animation and call to action -->
+  <div class="card" style="text-align: center; background: linear-gradient(125deg, #1a1c3b, #0f1029);">
+    <i class="fas fa-paw" style="font-size: 3rem; color: #9f7aea;"></i>
+    <h3 style="margin: 0.5rem 0;">🐻‍❄️ Ready to command? Deploy Spyke Bear today</h3>
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+      <a href="#" class="social-btn" style="background:#6d28d9;"><i class="fab fa-github"></i> Star on GitHub</a>
+      <a href="#" class="social-btn" style="background:#2563eb;"><i class="fas fa-book"></i> Full Docs (PDF)</a>
+    </div>
+    <p class="tagline" style="margin-top: 1rem;">⭐ 2.4k+ stars • Enterprise ready • Deployed in 5min</p>
+  </div>
+
+  <footer>
+    <p>© 2026 Spyke Bear CyberSecurity — Open Source Intelligence & Automated Response Framework. All integrations maintained with ❤️ by the bear team. | <i class="fab fa-github"></i> <i class="fab fa-gitlab"></i> <i class="fab fa-slack"></i> <i class="fab fa-discord"></i> <i class="fab fa-twitter"></i></p>
+    <p style="margin-top: 0.5rem; font-size: 0.7rem;">Spyke Bear is a cybersecurity mascot, always under GPLv3 license. Commands fired via any integrated platform require authorized tokens.</p>
+  </footer>
+</div>
+
+<script>
+  // Animation: Terminal demo command firing / live response simulation
+  const animateBtn = document.getElementById('animateCmdBtn');
+  const outputDiv = document.getElementById('animationOutput');
+  const demoCommandSpan = document.getElementById('demoCommand');
+  const commandsList = ['/spyke scan network', '/spyke threat intel 1.1.1.1', '/spyke logs firewall', '/spyke status --verbose', '/spyke lockdown --service ALL'];
+  let idx = 0;
+
+  function updateDemoCommand() {
+    idx = (idx + 1) % commandsList.length;
+    demoCommandSpan.innerText = commandsList[idx];
+  }
+  setInterval(updateDemoCommand, 3200);
+
+  async function fireDemoCommand() {
+    const currentCmd = demoCommandSpan.innerText;
+    outputDiv.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Spyke Bear executing "${currentCmd}" ...`;
+    // simulate realistic response based on command (animated)
+    setTimeout(() => {
+      let simulatedResponse = '';
+      if(currentCmd.includes('scan network')) {
+        simulatedResponse = '✅ [SCAN COMPLETE] Hosts up: 192.168.1.12, 192.168.1.45, 192.168.1.78 | Open ports: 22, 443, 8080. No malicious indicators.';
+      } else if(currentCmd.includes('threat intel')) {
+        simulatedResponse = '🔍 VT Score: 0/90 Clean | ASN: Cloudflare | No known malware. Geolocation: US. Category: CDN.';
+      } else if(currentCmd.includes('logs firewall')) {
+        simulatedResponse = '📄 Firewall logs last 6h: 230 rejected inbound attempts, 12 port scans blocked. IP 45.33.22.11 flagged (bruteforce).';
+      } else if(currentCmd.includes('status')) {
+        simulatedResponse = '🐻‍❄️ Spyke Bear Uptime: 14d 8h | Connected platforms: Telegram,Slack,Discord,iMessage,Web | CPU load: 12% | Memory: 410MB';
+      } else if(currentCmd.includes('lockdown')) {
+        simulatedResponse = '⚠️ LOCKDOWN INITIATED: All non-essential services disabled, SSH switched to key-only, network segmentation active. Administrators notified.';
+      } else {
+        simulatedResponse = '✔️ Command processed: action executed under zero-trust policy. Bear protects!';
+      }
+      outputDiv.innerHTML = `<i class="fas fa-bear"></i> <strong>Response</strong>: ${simulatedResponse} <br> <span style="font-size:0.7rem;">[secure channel]</span>`;
+    }, 800);
+  }
+
+  animateBtn.addEventListener('click', fireDemoCommand);
+  
+  // additional first animation load effect
+  window.addEventListener('load', () => {
+    outputDiv.innerHTML = '🐻‍❄️ Spyke Bear online — listening for commands via Telegram, Slack, Discord, iMessage & Web. Try demo "Fire Demo"!';
+  });
+</script>
+</body>
+</html>
